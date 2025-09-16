@@ -20,31 +20,42 @@ class Rectangle:
         return self.width * self.length
 
 
-class Square(Rectangle):
-    def __init__(self, length=1, width=1):
-        # width is never used, but method matches signature of parent's init
-        self.length = length
-        self.width = length
+class Square:
+    def __init__(self, side=1):
+        self._rectangle = Rectangle(side, side)
 
-    def setLength(self, n):
-        self.length = n
-        self.width = n
+    def setSide(self, n):
+        self._rectangle.setLength(n)
+        self._rectangle.setWidth(n)
 
-    def setWidth(self, n):
-        self.width = n
-        self.length = n
+    def getSide(self):
+        return self._rectangle.getLength()
+
+    def area(self):
+        return self._rectangle.area()
 
 
 # main#############################################
 
-def measure(s):
-    print(s.getWidth(), "x", s.getLength())
-    print("Area:", s.area())
+def measure_rectangle(r):
+    print(r.getWidth(), "x", r.getLength())
+    print("Area:", r.area())
 
     print("double length...")
-    s.setLength(2 * s.getLength())
+    r.setLength(2 * r.getLength())
 
-    print(s.getWidth(), "x", s.getLength())
+    print(r.getWidth(), "x", r.getLength())
+    print("Area:", r.area())
+
+
+def measure_square(s):
+    print(s.getSide(), "x", s.getSide())
+    print("Area:", s.area())
+
+    print("double side...")
+    s.setSide(2 * s.getSide())
+
+    print(s.getSide(), "x", s.getSide())
     print("Area:", s.area())
 
 
@@ -52,6 +63,6 @@ a = Square(6)
 b = Rectangle(8, 3)
 
 print("\nsquare")
-measure(a)
+measure_square(a)
 print("\nrectangle")
-measure(b)
+measure_rectangle(b)
